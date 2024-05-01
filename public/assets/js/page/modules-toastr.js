@@ -9,6 +9,14 @@ $("#eror-gambar").click(function() {
   });
 });
 
+$("#eror-ukuran-gambar").click(function() {
+  iziToast.warning({
+    // title: 'Error!',
+    message: 'Gambar tidak boleh lebih dari 3mb',
+    position: 'topRight'
+  });
+});
+
 $("#edit-password").click(function() {
   iziToast.success({
     // title: 'Hello, world!',
@@ -17,10 +25,34 @@ $("#edit-password").click(function() {
   });
 });
 
+$("#edit-status").click(function() {
+  iziToast.success({
+    // title: 'Hello, world!',
+    message: 'Status kos berhasil diubah',
+    position: 'topRight'
+  });
+});
+
 $("#gagal-login").click(function() {
   iziToast.error({
     // title: 'Hello, world!',
     message: 'Username dan Password tidak valid',
+    position: 'topRight'
+  });
+});
+
+$("#gagal-edit-password").click(function() {
+  iziToast.error({
+    // title: 'Hello, world!',
+    message: 'Gagal edit password, pastikan password yang di inputkan sama!',
+    position: 'topRight'
+  });
+});
+
+$("#gagal-edit-data").click(function() {
+  iziToast.error({
+    // title: 'Hello, world!',
+    message: 'Gagal edit data, pastikan data yang diinputkan sesuai ketentuan!',
     position: 'topRight'
   });
 });

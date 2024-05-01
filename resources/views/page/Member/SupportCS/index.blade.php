@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <h4>WhatsApp</h4>
                             <p>Hubungi CS melalui kontak WhatsApp berikut: (0853 5323 5600)</p>
-                            <a href="features-setting-detail.html" class="card-cta">Hubungi <i
+                            <a href="https://api.whatsapp.com/send?phone=6285353235600" target="_blank" class="card-cta">Hubungi <i
                                     class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
@@ -28,8 +28,8 @@
                         </div>
                         <div class="card-body">
                             <h4>Email</h4>
-                            <p>Hubungi CS melalui alamat Email berikut: (klik-kost-support-cs@gmail.com)</p>
-                            <a href="mailto:teguhsimdig8@gmail.com" class="card-cta">Hubungi <i
+                            <p>Hubungi CS melalui alamat Email berikut: (klikost.cs@gmail.com)</p>
+                            <a href="mailto:klikost.cs@gmail.com" class="card-cta">Hubungi <i
                                     class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>

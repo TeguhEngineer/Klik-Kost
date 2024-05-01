@@ -113,6 +113,13 @@ class InputDatakosController extends Controller
         User::where('id', auth()->user()->id)->update($validasi);
         return back()->with('edit','');
     }
+    public function edit_status(Request $request, $id) {
+        $editStatus = $request->validate([
+            'status_kost'   => 'required'
+        ]);
+        kost::find($id)->update($editStatus);
+        return back()->with('edit-status','');
+    }
 
     /**
      * Remove the specified resource from storage.

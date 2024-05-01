@@ -106,7 +106,7 @@
                                 value="{{ old('link_maps') }}" name="link_maps" tabindex="6" required />
                         </div>
                         <button class="btn btn--radius btn--register" type="submit"
-                            tabindex="7">Konfrimasi</button>
+                            tabindex="7" style="padding: 4px 0 4px 0;">Konfirmasi</button>
                         <p style="margin-top: 10px; text-align: end; color: #555">
                             Sudah punya akun?
                             <a style="text-decoration: none; color: #007bff" href="/login" tabindex="8"> Klik

@@ -31,7 +31,7 @@
     @endif
 
     <section class="section">
-        <div class="section-header justify-content-center">
+        <div class="section-header">
             <h1>Profil</h1>
             <button type="button" class="tombolClass" style="display: none" id="edit-password"></button>
         </div>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <input type="text" id="status" class="form-control" value="{{ $authAdmin->status }}"
+                                <input type="text" id="status" class="form-control" value="{{ ucfirst($authAdmin->status) }}"
                                     disabled>
                             </div>
                         </div>
@@ -99,8 +99,8 @@
                                             value="{{ $authAdmin->name }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="telp">Nomor Telephone</label>
-                                        <input type="text" name="no_tlp" id="telp" class="form-control"
+                                        <label for="telp">Nomor Telepon</label>
+                                        <input type="number" name="no_tlp" id="telp" class="form-control"
                                             value="{{ $authAdmin->no_tlp }}">
                                     </div>
                                 </div>
@@ -122,16 +122,18 @@
                                     <h4><i class="fas fa-key"></i> Edit Password</h4>
                                 </div>
                                 <div class="card-body py-0">
-                                    <div class="form-group">
-                                        <label for="telp">Password baru</label>
-                                        <input type="password" name="password" id="telp" class="form-control "
+                                    <div class="form-group mb-3">
+                                        <label for="passwordInput">Password baru</label>
+                                        <input type="password" name="password" id="passwordInput" class="form-control "
                                             value="{{ old('password') }}">
-
-
                                     </div>
-                                    <div class="form-group">
-                                        <label for="telp">Konfirmasi Password</label>
-                                        <input type="password" name="password_confirmation" id="telp"
+
+                                    <input type="checkbox" id="showPasswordCheckbox">
+                                    <small>Tampilkan Password</small>
+
+                                    <div class="form-group mt-3">
+                                        <label for="passwordConf">Konfirmasi Password</label>
+                                        <input type="password" name="password_confirmation" id="passwordConf"
                                             class="form-control @error('password') is-invalid @enderror"
                                             value="{{ old('password_confirmation') }}">
                                         @if ($errors->any())
@@ -140,6 +142,24 @@
                                             </div>
                                         @endif
                                     </div>
+
+                                    <script>
+                                        const passwordInput = document.getElementById('passwordInput');
+                                        const passwordConf = document.getElementById('passwordConf');
+                                        const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+                            
+                                        showPasswordCheckbox.addEventListener('change', function() {
+                                            if (showPasswordCheckbox.checked) {
+                                                // Jika checkbox diceklis, tampilkan kata sandi
+                                                passwordInput.type = 'text';
+                                                passwordConf.type = 'text';
+                                            } else {
+                                                // Jika checkbox tidak diceklis, sembunyikan kata sandi
+                                                passwordInput.type = 'password';
+                                                passwordConf.type = 'password';
+                                            }
+                                        });
+                                    </script>
                                 </div>
                                 <div class="card-footer pt-0">
                                     <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>

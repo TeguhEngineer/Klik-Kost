@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
 
-        <div class="section-header justify-content-center">
+        <div class="section-header">
             <div class="section-header-back">
                 <a href="/datamember" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
@@ -58,13 +58,17 @@
                                             </select>
                                         </div>
                                         <input type="hidden" name="role" value="member">
-                                        <div class="form-group">
+                                        <div class="form-group mb-3">
                                             <label>Password</label>
-                                            <input type="password" name="password" class="form-control" required>
+                                            <input type="password" id="passwordInput" name="password" class="form-control" required>
                                         </div>
-                                        <div class="form-group">
+
+                                        <input type="checkbox" id="showPasswordCheckbox">
+                                        <small>Tampilkan Password</small>
+
+                                        <div class="form-group mt-3">
                                             <label> Konfirmasi Password</label>
-                                            <input type="password" name="password_confirmation"
+                                            <input type="password" id="passwordConf" name="password_confirmation"
                                                 class="form-control @error('password_confirmation') is-invalid @enderror"
                                                 required>
                                             @error('password_confirmation')
@@ -73,6 +77,24 @@
                                                 </div>
                                             @enderror
                                         </div>
+
+                                        <script>
+                                            const passwordInput = document.getElementById('passwordInput');
+                                            const passwordConf = document.getElementById('passwordConf');
+                                            const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+
+                                            showPasswordCheckbox.addEventListener('change', function() {
+                                                if (showPasswordCheckbox.checked) {
+                                                    // Jika checkbox diceklis, tampilkan kata sandi
+                                                    passwordInput.type = 'text';
+                                                    passwordConf.type = 'text';
+                                                } else {
+                                                    // Jika checkbox tidak diceklis, sembunyikan kata sandi
+                                                    passwordInput.type = 'password';
+                                                    passwordConf.type = 'password';
+                                                }
+                                            });
+                                        </script>
                                     </div>
                                 </div>
                             </div>

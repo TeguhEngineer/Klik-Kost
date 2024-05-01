@@ -56,6 +56,20 @@
                     };
                 </script>
             @endif
+            @error('files.*')
+                <button type="button" style="display: none" id="eror-ukuran-gambar"></button>
+                <script>
+                    // Fungsi ini akan dipanggil saat halaman dimuat
+                    window.onload = function() {
+                        // Mengambil referensi tombol
+                        var button = document.getElementById('eror-ukuran-gambar');
+
+                        // Simulasikan klik pada tombol
+                        button.click();
+                        button.style.display = 'none';
+                    };
+                </script>
+            @enderror
         </div>
 
         <div class="section-body">
@@ -77,7 +91,7 @@
                                                             Ukuran gambar maximal 3mb</em></span>
                                                     <input type="file" name="files[]"
                                                         class="form-control @error('files') is-invalid @enderror"
-                                                        accept="image/*" multiple required>
+                                                        accept="image/*" multiple="" required>
 
                                                     @error('files')
                                                         <span class="invalid-feedback" role="alert">
@@ -87,7 +101,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-footer pt-0 ">
+                                        <div class="card-footer pt-0 text-right">
                                             <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>
                                                 Simpan</button>
                                         </div>
@@ -120,7 +134,7 @@
                                                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                             data-bs-target="#modal-delete{{ $item->id }}"><i
                                                                 class="fas fa-trash"></i></button>
-                                                        
+
                                                     </td>
                                                 </tr>
                                             </tbody>

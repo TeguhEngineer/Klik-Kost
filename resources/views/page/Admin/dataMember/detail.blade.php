@@ -36,7 +36,11 @@
             <td><b>Status</b></td>
             <td><b>:</b></td>
             <td>
-                <div class="badge badge-success px-3">{{ $item->status }}</div>
+                @if ($item->status == 'aktif')
+                    <div class="badge badge-success px-3">{{ $item->status }}</div>
+                @else
+                    <div class="badge badge-danger px-3">{{ $item->status }}</div>
+                @endif
             </td>
         </tr>
     </table>

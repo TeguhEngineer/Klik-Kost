@@ -1,7 +1,7 @@
 <form action="/datakos/{{ $item->id }}" method="POST">
     @csrf
     @method('PUT')
-    <div class="modal-body">
+    <div class="modal-body pb-0">
         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -19,7 +19,7 @@
             <div class="form-group col-md-6">
                 <label>Tipe Kos <span class="text-danger">*</span></label>
                 <select name="tipe_kost" class="form-control" required>
-                    <option selected value="{{ ucfirst($item->tipe_kost) }}">{{ ucfirst($item->tipe_kost) }}</option>
+                    <option selected value="{{ ucfirst($item->tipe_kost) }}" hidden>{{ ucfirst($item->tipe_kost) }}</option>
                     <option value="putra">Putra</option>
                     <option value="putri">Putri</option>
                     <option value="campur">Campur</option>
@@ -33,14 +33,27 @@
             <div class="form-group col-md-3">
                 <label>Status <span class="text-danger">*</span></label>
                 <select name="status_kost" class="form-control" required>
-                    <option selected value="{{ ucfirst($item->status_kost) }}">{{ ucfirst($item->status_kost) }}
-                    </option>
-                    <option value="sisa1">Tersisa 1 Pintu</option>
-                    <option value="sisa2">Tersisa 2 Pintu</option>
-                    <option value="sisa3">Tersisa 3 Pintu</option>
-                    <option value="sisa4">Tersisa 4 Pintu</option>
-                    <option value="sisa5">Tersisa 5 Pintu</option>
-                    <option value="lebih5">Tersisa 5 Pintu Lebih</option>
+                    @if ($item->status_kost == 'sisa1')
+                    <option selected value="{{ ucfirst($item->status_kost) }}" hidden>Tersisa 1 Kost</option>
+                    @elseif ($item->status_kost == 'sisa2')
+                    <option selected value="{{ ucfirst($item->status_kost) }}" hidden>Tersisa 2 Kost</option>
+                    @elseif ($item->status_kost == 'sisa3')
+                    <option selected value="{{ ucfirst($item->status_kost) }}" hidden>Tersisa 3 Kost</option>
+                    @elseif ($item->status_kost == 'sisa4')
+                    <option selected value="{{ ucfirst($item->status_kost) }}" hidden>Tersisa 4 Kost</option>
+                    @elseif ($item->status_kost == 'sisa5')
+                    <option selected value="{{ ucfirst($item->status_kost) }}" hidden>Tersisa 5 Kost</option>
+                    @elseif ($item->status_kost == 'lebih5')
+                    <option selected value="{{ ucfirst($item->status_kost) }}" hidden>Tersisa 5 Kost Lebih</option>
+                    @elseif ($item->status_kost == 'penuh')
+                    <option selected value="{{ ucfirst($item->status_kost) }}" hidden>Penuh</option>
+                    @endif
+                    <option value="sisa1">Tersisa 1 Kost</option>
+                    <option value="sisa2">Tersisa 2 Kost</option>
+                    <option value="sisa3">Tersisa 3 Kost</option>
+                    <option value="sisa4">Tersisa 4 Kost</option>
+                    <option value="sisa5">Tersisa 5 Kost</option>
+                    <option value="lebih5">Tersisa 5 Kost Lebih</option>
                     <option value="penuh">Penuh</option>
                 </select>
             </div>
@@ -49,21 +62,12 @@
             <div class="form-group col-md-3">
                 <label>Kecamatan <span class="text-danger">*</span></label>
                 <select name="kecamatan_id" class="form-control" required>
-                    <option selected value="{{ ucfirst($item->kecamatan->id) }}">
+                    <option selected value="{{ ucfirst($item->kecamatan->id) }}" hidden>
                         {{ ucfirst($item->kecamatan->nama_kc) }}</option>
                     @foreach ($kecamatan as $kc)
                         <option value="{{ $kc->id }}">{{ $kc->nama_kc }}</option>
                     @endforeach
-                    {{-- <option value="1">Cipedes</option>
-                    <option value="2">Cihideung</option>
-                    <option value="3">Cibereum</option>
-                    <option value="4">Bungursari</option>
-                    <option value="5">Indihiang</option>
-                    <option value="6">Kawalu</option>
-                    <option value="7">Mangkubumi</option>
-                    <option value="8">Purbaratu</option>
-                    <option value="9">Tamansari</option>
-                    <option value="10">Tawang</option> --}}
+                   
                 </select>
             </div>
             <div class="form-group col-md-3">
@@ -72,37 +76,17 @@
                     @if ($kost->area_id == null)
                         <option selected disabled value="">-- Masukan Area Kampus --</option>
                     @else
-                        <option selected value="{{ ucfirst($item->area->id) }}">{{ ucfirst($item->area->nama_kps) }}
+                        <option selected value="{{ ucfirst($item->area->id) }}" hidden>{{ ucfirst($item->area->nama_kps) }}
                         </option>
                     @endif
-                    <option value=""></option>
                     @foreach ($areaKampus as $area)
                         <option value="{{ $area->id }}">{{ $area->nama_kps }}
                         </option>
                     @endforeach
-                    {{-- <option value="1">UNSIL</option>
-                    <option value="2">UPI</option>
-                    <option value="3">POLTEKKES</option>
-                    <option value="4">UMTAS</option>
-                    <option value="5">UNPER</option>
-                    <option value="6">YPPT</option>
-                    <option value="7">BTH</option>
-                    <option value="8">Poltekes Triguna</option>
-                    <option value="9">STISIP</option>
-                    <option value="10">STT YBSI</option>
-                    <option value="11">LP3I</option>
-                    <option value="12">STAI</option>
-                    <option value="13">Mitra Kencana</option>
-                    <option value="14">Akbid Kebidanan Shahida</option>
-                    <option value="15">Akademi Pariwisata Siliwangi</option>
-                    <option value="16">Politeknik Kesehatan Gigi</option>
-                    <option value="17">Dirgantara Pilot School</option>
-                    <option value="18">STIT</option>
-                    <option value="19">STAINU</option> --}}
                 </select>
             </div>
             <div class="form-group col-md-6">
-                <label for="link_maps">Link Maps</label>
+                <label for="link_maps">Link Maps <span class="text-danger">*</span></label>
                 <input type="text" name="link_maps" class="form-control" id="link_maps" placeholder="Link Maps"
                     value="{{ auth()->user()->link_maps }}" required>
             </div>
@@ -113,7 +97,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="alamat">Alamat</label>
+                <label for="alamat">Alamat <span class="text-danger">*</span></label>
                 <textarea class="form-control" name="alamat_kost" id="alamat" cols="30" rows="10" required>{{ ucfirst(auth()->user()->alamat_kost) }}</textarea>
             </div>
             <div class="form-group col-md-6">

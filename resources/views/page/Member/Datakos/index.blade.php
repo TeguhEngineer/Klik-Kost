@@ -14,6 +14,19 @@
             </div>
         </div>
     @endforeach
+    @foreach ($dataKost as $status)
+        <div class="modal fade" id="status{{ $status->id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Edit Status Kos</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    @include('page.Member.Datakos.edit-status')
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     @if (session()->has('create'))
         <button type="button" style="display: none" id="create"></button>
@@ -36,6 +49,20 @@
             window.onload = function() {
                 // Mengambil referensi tombol
                 var button = document.getElementById('edit');
+
+                // Simulasikan klik pada tombol
+                button.click();
+                button.style.display = 'none';
+            };
+        </script>
+    @endif
+    @if (session()->has('edit-status'))
+        <button type="button" style="display: none" id="edit-status"></button>
+        <script>
+            // Fungsi ini akan dipanggil saat halaman dimuat
+            window.onload = function() {
+                // Mengambil referensi tombol
+                var button = document.getElementById('edit-status');
 
                 // Simulasikan klik pada tombol
                 button.click();
@@ -80,15 +107,34 @@
                                                     value="{{ ucfirst($item->tipe_kost) }}" disabled>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="jumlah_kost">Jumlah Kost</label>
+                                                <label for="jumlah_kost">Jumlah Kos</label>
                                                 <input type="number" name="jumlah_kost" class="form-control"
                                                     id="jumlah_kost" placeholder="Jumlah Kos"
                                                     value="{{ $item->jumlah_kost }}" disabled>
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label>Status</label>
-                                                <input type="text" class="form-control"
-                                                    value="{{ ucfirst($item->status_kost) }}" disabled>
+                                                @if ($item->status_kost == 'sisa1')
+                                                    <input type="text" class="form-control" disabled
+                                                        value="Tersisa 1 Kost">
+                                                @elseif ($item->status_kost == 'sisa2')
+                                                    <input type="text" class="form-control" disabled
+                                                        value="Tersisa 2 Kost">
+                                                @elseif ($item->status_kost == 'sisa3')
+                                                    <input type="text" class="form-control" disabled
+                                                        value="Tersisa 3 Kost">
+                                                @elseif ($item->status_kost == 'sisa4')
+                                                    <input type="text" class="form-control" disabled
+                                                        value="Tersisa 4 Kost">
+                                                @elseif ($item->status_kost == 'sisa5')
+                                                    <input type="text" class="form-control" disabled
+                                                        value="Tersisa 5 Kost">
+                                                @elseif ($item->status_kost == 'lebih5')
+                                                    <input type="text" class="form-control" disabled
+                                                        value="Tersisa 5 Kost Lebih">
+                                                @elseif ($item->status_kost == 'penuh')
+                                                    <input type="text" class="form-control" disabled value="Penuh">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -129,7 +175,7 @@
                                                     <div class="input-group-prependd">
                                                         <div class="input-group-text">Rp</div>
                                                     </div>
-                                                    <input type="number" name="harga_kost" class="form-control"
+                                                    <input type="text" name="harga_kost" class="form-control"
                                                         id="harga" placeholder="Harga Kos"
                                                         value="{{ number_format($item->harga_kost, 0, ',', '.') }}"
                                                         disabled>
@@ -138,10 +184,12 @@
 
                                         </div>
                                     </div>
-                                    <div class="card-footer pt-0">
+                                    <div class="card-footer pt-0 text-center">
                                         <button class="btn btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#modal-edit{{ $item->id }}"><i class="fas fa-edit"></i>
-                                            Edit</button>
+                                            Edit Data</button>
+                                        <button class="btn btn-info" data-bs-toggle="modal"
+                                        data-bs-target="#status{{ $item->id }}"><i class="fas fa-edit"></i> Edit Status</button>
                                     </div>
                                 @endforeach
                             </div>
@@ -172,9 +220,11 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Tipe Kos <span class="text-danger">*</span></label>
-                                                <select name="tipe_kost"
-                                                    class="form-control" required>
+                                                <select name="tipe_kost" class="form-control" required>
                                                     <option selected disabled>--- Pilih Tipe Kos ---</option>
+                                                    <option value="{{ old('tipe_kost') }}"
+                                                        {{ Request::old('tipe_kost') ? 'selected' : '' }} hidden>
+                                                        {{ ucfirst(old('tipe_kost')) }}</option>
                                                     <option value="putra">Putra</option>
                                                     <option value="putri">Putri</option>
                                                     <option value="campur">Campur</option>
@@ -186,7 +236,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="jumlah_kost">Jumlah Kost <span
+                                                <label for="jumlah_kost">Jumlah Kos <span
                                                         class="text-danger">*</span></label>
                                                 <input type="number" name="jumlah_kost"
                                                     class="form-control @error('jumlah_kost') is-invalid @enderror"
@@ -200,15 +250,43 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label>Status <span class="text-danger">*</span></label>
-                                                <select name="status_kost"
-                                                    class="form-control" required>
+                                                <select name="status_kost" class="form-control" required>
                                                     <option selected disabled>--- Pilih Status ---</option>
-                                                    <option value="sisa1">Tersisa 1 Pintu</option>
-                                                    <option value="sisa2">Tersisa 2 Pintu</option>
-                                                    <option value="sisa3">Tersisa 3 Pintu</option>
-                                                    <option value="sisa4">Tersisa 4 Pintu</option>
-                                                    <option value="sisa5">Tersisa 5 Pintu</option>
-                                                    <option value="lebih5">Lebih dari 5 Pintu</option>
+                                                    @if (old('status_kost') == 'sisa1')
+                                                        <option value="{{ old('status_kost') }}"
+                                                            {{ Request::old('status_kost') ? 'selected' : '' }} hidden>
+                                                            {{ 'Tersisa 1 Kost' }}</option>
+                                                    @elseif (old('status_kost') == 'sisa2')
+                                                        <option value="{{ old('status_kost') }}"
+                                                            {{ Request::old('status_kost') ? 'selected' : '' }} hidden>
+                                                            {{ 'Tersisa 2 Kost' }}</option>
+                                                    @elseif (old('status_kost') == 'sisa3')
+                                                        <option value="{{ old('status_kost') }}"
+                                                            {{ Request::old('status_kost') ? 'selected' : '' }} hidden>
+                                                            {{ 'Tersisa 3 Kost' }}</option>
+                                                    @elseif (old('status_kost') == 'sisa4')
+                                                        <option value="{{ old('status_kost') }}"
+                                                            {{ Request::old('status_kost') ? 'selected' : '' }} hidden>
+                                                            {{ 'Tersisa 4 Kost' }}</option>
+                                                    @elseif (old('status_kost') == 'sisa5')
+                                                        <option value="{{ old('status_kost') }}"
+                                                            {{ Request::old('status_kost') ? 'selected' : '' }} hidden>
+                                                            {{ 'Tersisa 5 Kost' }}</option>
+                                                    @elseif (old('status_kost') == 'lebih5')
+                                                        <option value="{{ old('status_kost') }}"
+                                                            {{ Request::old('status_kost') ? 'selected' : '' }} hidden>
+                                                            {{ 'Tersisa 5 Kost Lebih' }}</option>
+                                                    @elseif (old('status_kost') == 'penuh')
+                                                        <option value="{{ old('status_kost') }}"
+                                                            {{ Request::old('status_kost') ? 'selected' : '' }} hidden>
+                                                            {{ 'Penuh' }}</option>
+                                                    @endif
+                                                    <option value="sisa1">Tersisa 1 Kost</option>
+                                                    <option value="sisa2">Tersisa 2 Kost</option>
+                                                    <option value="sisa3">Tersisa 3 Kost</option>
+                                                    <option value="sisa4">Tersisa 4 Kost</option>
+                                                    <option value="sisa5">Tersisa 5 Kost</option>
+                                                    <option value="lebih5">Tersisa 5 Kost Lebih</option>
                                                     <option value="penuh">Penuh</option>
                                                 </select>
                                                 @error('status_kost')
@@ -221,12 +299,18 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
                                                 <label>Kecamatan <span class="text-danger">*</span></label>
-                                                <select name="kecamatan_id"
-                                                    class="form-control select2 "
-                                                    required>
+                                                <select name="kecamatan_id" class="form-control select2 " required>
                                                     <option selected disabled>--- Pilih Kecamatan ---</option>
                                                     @foreach ($kecamatan as $item)
-                                                        <option value="{{ $item->id }}">{{ $item->nama_kc }}</option>
+                                                        @if (old('kecamatan_id'))
+                                                            <option value="{{ $item->id }}"
+                                                                {{ old('kecamatan_id') == $item->id ? 'selected' : '' }}>
+                                                                {{ ucfirst($item->nama_kc) }}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $item->id }}">{{ $item->nama_kc }}
+                                                            </option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                                 @error('kecamatan_id')
@@ -241,8 +325,15 @@
                                                     <option selected disabled value="">--- Pilih Area Kampus ---
                                                     </option>
                                                     @foreach ($areaKampus as $item)
-                                                        <option value="{{ $item->id }}">{{ $item->nama_kps }}
-                                                        </option>
+                                                        @if (old('area_id'))
+                                                            <option value="{{ $item->id }}"
+                                                                {{ old('area_id') == $item->id ? 'selected' : '' }}>
+                                                                {{ ucfirst($item->nama_kps) }}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $item->id }}">{{ $item->nama_kps }}
+                                                            </option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -299,7 +390,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="card-footer">
+                                    <div class="card-footer text-right">
                                         <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>
                                             Simpan</button>
                                     </div>

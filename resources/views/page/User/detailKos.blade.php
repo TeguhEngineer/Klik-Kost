@@ -2,17 +2,24 @@
 @section('content')
     <section>
         <div class="container">
-             {{-- Untuk mengecek data kost berdasarkan id --}}
+            {{-- Untuk mengecek data kost berdasarkan id --}}
             @if ($detailKos)
                 @if ($detailKos->user->status == 'aktif')
                     <p class="fs-3 fw-bold text-content" style="color: #6777ef">Detail Kost</p>
                     <div class="d-flex" style="overflow-x: auto">
-                        @foreach ($gambarKos as $item)
+                        @if ($gambarKos->count() < 1)
                             <div class="my-2 mx-2" style="flex: 0 0 auto; max-width: 300px">
-                                <img src="/galleryKost/{{ $item->url }}" alt=""
+                                <img src="/indexUser/assets/img/belumadagambar.jpg" alt=""
                                     style="width: 100%; max-height: 200px;" />
                             </div>
-                        @endforeach
+                        @else
+                            @foreach ($gambarKos as $item)
+                                <div class="my-2 mx-2" style="flex: 0 0 auto; max-width: 300px">
+                                    <img src="/galleryKost/{{ $item->url }}" alt=""
+                                        style="width: 100%; max-height: 200px;" />
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
 
 
@@ -38,25 +45,25 @@
                             </div>
                             <div class="col-lg-3 col-6">
                                 @if ($detailKos->status_kost == 'sisa1')
-                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">1 Kamar</span>
+                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">1 Kost</span>
                                     </p>
                                 @elseif ($detailKos->status_kost == 'sisa2')
-                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">2 Kamar</span>
+                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">2 Kost</span>
                                     </p>
                                 @elseif ($detailKos->status_kost == 'sisa3')
-                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">3 Kamar</span>
+                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">3 Kost</span>
                                     </p>
                                 @elseif ($detailKos->status_kost == 'sisa4')
-                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">4 Kamar</span>
+                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">4 Kost</span>
                                     </p>
                                 @elseif ($detailKos->status_kost == 'sisa5')
-                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">5 Kamar</span>
+                                    <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">5 Kost</span>
                                     </p>
                                 @elseif ($detailKos->status_kost == 'lebih5')
                                     <p><i class="bi bi-door-open-fill"></i> Tersisa <span class="text-danger">Lebih dari 5
-                                            Kamar</span></p>
+                                            Kost</span></p>
                                 @elseif ($detailKos->status_kost == 'penuh')
-                                    <p><i class="bi bi-door-open-fill"></i><span class="text-danger">Kamar Penuh</span></p>
+                                    <p><i class="bi bi-door-open-fill"></i><span class="text-danger">Kost Penuh</span></p>
                                 @endif
                             </div>
                         </div>
@@ -91,7 +98,7 @@
                         </div>
                         <div class="border border-bottom border-secondary"></div>
                         <div class="mt-4 text-a d-flex">
-                            <img src="/indexUser/assets/img/LOGO.png" alt=""
+                            <img src="/assets/img/avatar/avatar-1.png" alt="Gambar Member"
                                 class="rounded-pill border border-secondary img-a">
                             <p class="ms-3 my-auto">Kost dikelola oleh <span
                                     class="fw-bold">{{ $detailKos->user->name }}</span><br> No. Telepon

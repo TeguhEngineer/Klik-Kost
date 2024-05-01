@@ -42,13 +42,14 @@ Auth::routes();
 Route::middleware('can:member')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']);
     Route::resource('/datakos', InputDatakosController::class);
+    Route::put('/datakost/{id}', [InputDatakosController::class, 'edit_status']);
     Route::resource('/fasilitaskos', FasilitaskosController::class);
     Route::get('/gambarkos', [GambarkosController::class, 'index']);
     Route::post('/gambarkos', [GambarkosController::class, 'gambar']);
     Route::delete('/gambarkos/{id}', [GambarkosController::class, 'delete_gambar']);
     Route::resource('/profil', ProfileController::class);
     Route::put('/editPassword/{id}', [ProfileController::class, 'edit_password']);
-    Route::get('supportCS', [HomeController::class, 'supportCS']);
+    Route::get('/supportCS', [HomeController::class, 'supportCS']);
 });
 
 // Admin
@@ -57,7 +58,8 @@ Route::middleware('can:admin')->group(function () {
     Route::get('/verifikasi', [verifikasiController::class, 'index']);
     Route::put('/verifikasi/{id}', [verifikasiController::class, 'update']);
     Route::resource('/datakost', DataKostController::class);
-    Route::resource('/dataadmin', DataAdminController::class);
+    Route::resource('/dataADM', DataAdminController::class);
+    // Fitur dinonaktifkan
     // Route::put('/dataadmin-password/{id}', [DataAdminController::class, 'update_password']);
     Route::resource('/datamember', DataMemberController::class);
     Route::put('/edit-password-member/{id}', [DataMemberController::class, 'edit_password']);

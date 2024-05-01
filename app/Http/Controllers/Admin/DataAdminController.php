@@ -88,12 +88,13 @@ class DataAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validateData = $request->validate([
-            'name'          => 'required',
-            'no_tlp'        => 'required',
-        ]);
-        User::find($id)->update($validateData);
-        return back()->with('edit','');
+        // Fitur dinonaktifkan
+        // $validateData = $request->validate([
+        //     'name'          => 'required',
+        //     'no_tlp'        => 'required',
+        // ]);
+        // User::find($id)->update($validateData);
+        // return back()->with('edit','');
     }
 
     // public function update_password(Request $request, $id)
@@ -115,7 +116,8 @@ class DataAdminController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return back()->with('delete','');
+        // Fitur dinonaktifkan
+        // User::find($id)->delete();
+        // return back()->with('delete','');
     }
 }

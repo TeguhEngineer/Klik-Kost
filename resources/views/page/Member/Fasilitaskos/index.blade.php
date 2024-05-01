@@ -43,7 +43,7 @@
     @endif
     <section class="section">
         <div class="section-header justify-content-center">
-            <h1>Fasilitas</h1>
+            <h1>Fasilitas Kos</h1>
             {{-- <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Index</a></div>
             </div> --}}
@@ -74,13 +74,14 @@
                                         </div>
 
                                     </div>
-                                    <div class="card-footer pt-0">
-                                        <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>
-                                            Simpan</button>
-                                        <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                                    <div class="card-footer pt-0 text-right">
+
+                                        <button class="btn btn-light" type="button" data-toggle="collapse"
                                             data-target="#collapseExample" aria-expanded="false"
                                             aria-controls="collapseExample"><i class="fas fa-list"></i> Input Fasilitas
                                             Lain</button>
+                                        <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>
+                                            Simpan</button>
                                     </div>
                                 </form>
                             </div>
@@ -99,9 +100,12 @@
                                             </div>
 
                                         </div>
-                                        <div class="card-footer pt-0">
+                                        <div class="card-footer pt-0 text-right">
                                             <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i>
                                                 Simpan</button>
+                                                <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                                                data-target="#collapseExample" aria-expanded="false"
+                                                aria-controls="collapseExample">Batal</button>
                                         </div>
                                     </form>
                                 </div>

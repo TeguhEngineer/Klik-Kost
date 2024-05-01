@@ -10,8 +10,8 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="/indexUser/assets/img/LOGO.png" rel="icon" />
-    <link href="/indexUser/assets/img/LOGO.png" rel="apple-touch-icon" />
+    <link href="/indexUser/assets/img/logo.png" rel="icon" />
+    <link href="/indexUser/assets/img/logo.png" rel="apple-touch-icon" />
 
     <!-- Google Fonts -->
     <link
@@ -265,7 +265,7 @@
                             <a href="/kampus/{{ $item->id }}">
                                 <div class="card bg-secondary text-white scroll-content mx-1 box">
                                     <div class="text-center">
-                                        <h4 class="text-content">{{ $item->nama_kps }}</h4>
+                                        <h4 class="text-content text-wrap">{{ $item->nama_kps }}</h4>
                                     </div>
                                 </div>
                             </a>
@@ -346,6 +346,7 @@
                             @if ($item->user->status == 'aktif')
                                 <div class="col-lg-4 col-6 my-2">
                                     <div class="card">
+                                        
                                         <div id="carouselExampleIndicators{{ $item->id }}"
                                             class="carousel slide">
                                             <div class="carousel-indicators">
@@ -371,6 +372,12 @@
                                                     aria-label="Slide 5"></button>
                                             </div>
                                             <div class="carousel-inner">
+                                                @if ($item->gambar->count()  < 1)
+                                                <div class="carousel-item active">
+                                                    <img src="/indexUser/assets/img/belumadagambar.jpg"
+                                                        class="d-block w-100 ukuran" alt="..." />
+                                                </div>
+                                                @else
                                                 @if ($item->gambar->count(0))
                                                     <div class="carousel-item active">
                                                         <img src="/galleryKost/{{ $item->gambar[0]->url }}"
@@ -383,6 +390,7 @@
                                                             class="d-block w-100 ukuran" alt="..." />
                                                     </div>
                                                 @endforeach
+                                                @endif
                                             </div>
                                             <button class="carousel-control-prev" type="button"
                                                 data-bs-target="#carouselExampleIndicators{{ $item->id }}"
@@ -426,42 +434,42 @@
                                             @if ($item->status_kost == 'sisa1')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i>
                                                     Tersisa
-                                                    <span class="text-danger">1 Kamar
+                                                    <span class="text-danger">1 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'sisa2')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i>
                                                     Tersisa
-                                                    <span class="text-danger">2 Kamar
+                                                    <span class="text-danger">2 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'sisa3')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i>
                                                     Tersisa
-                                                    <span class="text-danger">3 Kamar
+                                                    <span class="text-danger">3 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'sisa4')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i>
                                                     Tersisa
-                                                    <span class="text-danger">4 Kamar
+                                                    <span class="text-danger">4 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'sisa5')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i>
                                                     Tersisa
-                                                    <span class="text-danger">5 Kamar
+                                                    <span class="text-danger">5 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'lebih5')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i>
                                                     Tersisa
-                                                    <span class="text-danger">Lebih dari 5 Kamar
+                                                    <span class="text-danger">Lebih dari 5 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'penuh')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i>
-                                                    Kamar
+                                                    Kost
                                                     <span class="text-danger">Penuh
                                                     </span>
                                                 </p>

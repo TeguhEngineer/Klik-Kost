@@ -32,18 +32,25 @@
                                                     data-bs-slide-to="4" aria-label="Slide 5"></button>
                                             </div>
                                             <div class="carousel-inner">
-                                                @if ($item->gambar->count(0))
+                                                @if ($item->gambar->count() < 1)
                                                     <div class="carousel-item active">
-                                                        <img src="/galleryKost/{{ $item->gambar[0]->url }}"
+                                                        <img src="/indexUser/assets/img/belumadagambar.jpg"
                                                             class="d-block w-100 ukuran" alt="..." />
                                                     </div>
+                                                @else
+                                                    @if ($item->gambar->count(0))
+                                                        <div class="carousel-item active">
+                                                            <img src="/galleryKost/{{ $item->gambar[0]->url }}"
+                                                                class="d-block w-100 ukuran" alt="..." />
+                                                        </div>
+                                                    @endif
+                                                    @foreach ($item->gambar->skip(1) as $gambar)
+                                                        <div class="carousel-item">
+                                                            <img src="/galleryKost/{{ $gambar->url }}"
+                                                                class="d-block w-100 ukuran" alt="..." />
+                                                        </div>
+                                                    @endforeach
                                                 @endif
-                                                @foreach ($item->gambar->skip(1) as $gambar)
-                                                    <div class="carousel-item">
-                                                        <img src="/galleryKost/{{ $gambar->url }}"
-                                                            class="d-block w-100 ukuran" alt="..." />
-                                                    </div>
-                                                @endforeach
                                             </div>
                                             <button class="carousel-control-prev" type="button"
                                                 data-bs-target="#carouselExampleIndicators{{ $item->id }}"
@@ -77,38 +84,39 @@
                                             </p>
                                             @if ($item->status_kost == 'sisa1')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i> Tersisa
-                                                    <span class="text-danger">1 Kamar
+                                                    <span class="text-danger">1 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'sisa2')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i> Tersisa
-                                                    <span class="text-danger">2 Kamar
+                                                    <span class="text-danger">2 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'sisa3')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i> Tersisa
-                                                    <span class="text-danger">3 Kamar
+                                                    <span class="text-danger">3 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'sisa4')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i> Tersisa
-                                                    <span class="text-danger">4 Kamar
+                                                    <span class="text-danger">4 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'sisa5')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i> Tersisa
-                                                    <span class="text-danger">5 Kamar
+                                                    <span class="text-danger">5 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'lebih5')
                                                 <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i> Tersisa
-                                                    <span class="text-danger">Lebih dari 5 Kamar
+                                                    <span class="text-danger">Lebih dari 5 Kost
                                                     </span>
                                                 </p>
                                             @elseif ($item->status_kost == 'penuh')
-                                                <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i> Kamar
+                                                <p class="keterangan-mobile"><i class="bi bi-door-open-fill"></i> Kost
                                                     <span class="text-danger">Penuh
-                                                    </span></p>
+                                                    </span>
+                                                </p>
                                             @endif
 
                                             <a href="/detailkos/{{ $item->id }}"

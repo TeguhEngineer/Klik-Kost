@@ -50,9 +50,10 @@
                 <li class="{{ Request::is('datamember*') ? 'active' : '' }}"><a class="nav-link" href="/datamember"><i
                             class="fas fa-users"></i>
                         <span>Data Member</span></a></li>
-                <li class="{{ Request::is('dataadmin*') ? 'active' : '' }}"><a class="nav-link" href="/dataadmin"><i
+                {{-- Fitur dinonaktifkan --}}
+                {{-- <li class="{{ Request::is('dataadmin*') ? 'active' : '' }}"><a class="nav-link" href="/dataadmin"><i
                             class="fas fa-user"></i>
-                        <span>Data Admin</span></a></li>
+                        <span>Data Admin</span></a></li> --}}
                 <li class="{{ Request::is('datakost*') ? 'active' : '' }}"><a class="nav-link" href="/datakost"><i
                             class="fas fa-list"></i>
                         <span>Data Kosan</span></a></li>

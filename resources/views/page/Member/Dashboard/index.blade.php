@@ -27,13 +27,13 @@
                                             @if ($gambar->count(0))
                                                 <div class="carousel-item active">
                                                     <img class="d-block w-100" src="/galleryKost/{{ $gambar[0]->url }}"
-                                                        alt="First slide">
+                                                        alt="First slide" style="max-height: 300px; object-fit:cover; object-fit:contain;">
                                                 </div>
                                             @endif
                                             @foreach ($gambar->skip(1) as $item)
                                                 <div class="carousel-item">
                                                     <img class="d-block w-100" src="/galleryKost/{{ $item->url }}"
-                                                        alt="First slide">
+                                                        alt="First slide" style="max-height: 300px; object-fit:cover; object-fit:contain;">
                                                 </div>
                                             @endforeach
                                         </div>
@@ -151,13 +151,11 @@
                         </div>
                     </div>
                 @else
-                    {{-- <h1>Data Kos belum ada</h1> --}}
-
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="hero align-items-center bg-primary text-white">
                                 <div class="hero-inner text-center">
-                                    <h2>Hello, Selamat Datang {{ auth()->user()->name }}</h2>
+                                    <h2>Hallo, Selamat Datang {{ auth()->user()->name }}</h2>
                                     <p class="lead">Data Anda sudah terverifikasi, silahkan masukan data kos Anda.
                                     </p>
                                     <div class="mt-4">
@@ -174,12 +172,14 @@
                     <div class="col-12 mb-4">
                         <div class="hero align-items-center bg-warning text-white">
                             <div class="hero-inner text-center">
-                                <h2>Hello, Selamat Datang {{ auth()->user()->name }}</h2>
-                                <p class="lead">Data anda sedang kami tinjau dan pastikan data anda benar. Terimakasih
+                                <h2>Hallo, Selamat Datang {{ auth()->user()->name }}</h2>
+                                <p class="lead">Akun anda belum tervrifikasi. Data anda sedang kami tinjau dan pastikan data anda benar. Terimakasih
                                 </p>
                                 <div class="mt-4">
                                     <a href="/profil" class="btn btn-outline-white btn-lg btn-icon icon-left"><i
-                                            class="fas fa-user"></i>Profil</a>
+                                            class="fas fa-user"></i>Profil</a> <br>
+                                    <a href="/supportCS" class="btn btn-outline-white btn-sm btn-icon icon-left mt-2"><i
+                                            class="fas fa-headset"></i>Bantuan CS</a>
                                 </div>
                             </div>
                         </div>

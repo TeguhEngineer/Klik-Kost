@@ -110,6 +110,20 @@
             };
         </script>
     @endif
+    @error('password')
+        <button type="button" style="display: none" id="gagal-edit-password"></button>
+        <script>
+            // Fungsi ini akan dipanggil saat halaman dimuat
+            window.onload = function() {
+                // Mengambil referensi tombol
+                var button = document.getElementById('gagal-edit-password');
+
+                // Simulasikan klik pada tombol
+                button.click();
+                button.style.display = 'none';
+            };
+        </script>
+    @enderror
 
     <section class="section">
         <div class="section-header">
@@ -175,7 +189,9 @@
                                                         data-bs-target="#modal-edit{{ $item->id }}"><i
                                                             class="fas fa-edit"></i></button>
                                                     @if ($dataKos->where('user_id', $item->id)->count() > 0)
-                                                        <button class="btn btn-secondary" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Member memiliki data Kost."><i
+                                                        <button class="btn btn-secondary" type="button"
+                                                            class="btn btn-primary" data-toggle="tooltip"
+                                                            data-placement="top" title="Member memiliki data Kost."><i
                                                                 class="fas fa-trash"></i></button>
                                                     @else
                                                         <button class="btn btn-danger" data-bs-toggle="modal"

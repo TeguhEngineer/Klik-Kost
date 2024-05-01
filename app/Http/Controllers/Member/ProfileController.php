@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -76,8 +77,15 @@ class ProfileController extends Controller
         // dd(request()->all());
         $ValidateData = $request->validate([    
             'name'      => 'required',
-            'no_tlp'    => 'required|min:12|max:13',
+            // 'no_tlp'    => 'required|min:12|max:13|unique:users',
+            'no_tlp'    => [
+                'required',
+                'min:12',
+                'max:13',
+                Rule::unique('users')->ignore($id, 'id')
+            ]
         ]);
+
         User::find($id)->update($ValidateData);
         return back()->with('edit','');
     }

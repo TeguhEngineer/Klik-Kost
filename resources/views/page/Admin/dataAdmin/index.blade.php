@@ -103,7 +103,7 @@
                                             <th>Nama</th>
                                             <th>No Hp</th>
                                             <th>Level</th>
-                                            <th>Aksi</th>
+                                            {{-- <th>Aksi</th> --}}
 
                                         </tr>
                                     </thead>
@@ -118,7 +118,9 @@
                                                 <td>
                                                     <div class="badge badge-danger">{{ $item->role }}</div>
                                                 </td>
-                                                <td>
+
+                                                {{-- Fitur hapus data admin dinonaktifkan --}}
+                                                {{-- <td>
                                                     <button class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#modal-edit{{ $item->id }}"><i class="fas fa-edit"></i></button>
 
@@ -130,7 +132,7 @@
                                                     data-bs-target="#modal-delete{{ $item->id }}"><i class="fas fa-trash"></i></button>
                                                         
                                                     @endif
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         </tbody>
                                     @endforeach

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\kost;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class DashboardAdminController extends Controller
 {
@@ -13,7 +14,6 @@ class DashboardAdminController extends Controller
         return view('page.Admin.Dashboard.index', [
             'countNonAktif'         =>User::where('status', 'non-aktif')->count(),
             'countAktif'         =>User::where('role', 'member')->where('status','aktif')->count(),
-            'countAdmin'         =>User::where('role', 'admin')->count(),
             'countKos'         =>kost::all()->count(),
         ]);
     }
@@ -28,7 +28,12 @@ class DashboardAdminController extends Controller
     public function edit_profile(Request $request, $id) {
         $validateData = $request->validate([
             'name'      => 'required',
-            'no_tlp'    => 'required'
+            'no_tlp'    => [
+                'required',
+                'min:12',
+                'max:13',
+                Rule::unique('users')->ignore($id, 'id')
+            ]
         ]);
         // dd(request()->all());
         User::find($id)->update($validateData);
